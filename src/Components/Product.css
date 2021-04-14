@@ -28,7 +28,7 @@
   width: 100px;
   object-fit: contain;
 }
-input {
+.inputQty {
   width: 30px;
 }
 

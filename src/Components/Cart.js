@@ -17,25 +17,28 @@ function Cart({ items }) {
       <h2 style={{ textAlign: "center" }}>Cart</h2>
       <div className="table">
         <table>
-          <tr>
-            <th>Items</th>
-            <th>Quantity</th>
-            <th>Amount</th>
-          </tr>
-          {items.map((each) => {
-            if (each.qty != 0) {
-              return (
-                <tr key={each.id}>
-                  <td>{each.name}</td>
-                  <td>{each.qty}</td>
-                  <td>{`Rs. ${each.amount}`}</td>
-                </tr>
-              );
-            }
-          })}
-
-          <h3>Total:{total}</h3>
+          <thead>
+            <tr>
+              <th>Items</th>
+              <th>Quantity</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((each) => {
+              if (each.qty != 0) {
+                return (
+                  <tr key={each.id}>
+                    <td>{each.name}</td>
+                    <td>{each.qty}</td>
+                    <td>{`Rs. ${each.amount}`}</td>
+                  </tr>
+                );
+              }
+            })}
+          </tbody>
         </table>
+        <h3>Total:{total}</h3>
       </div>
     </div>
   );

@@ -36,6 +36,7 @@ function Products({ PRODUCT, handleQuantity }) {
               <div className="options">
                 <button onClick={() => IncrementQuantity(each)}>+</button>
                 <input
+                  className="inputQty"
                   type="number"
                   maxLength="1"
                   min="1"
