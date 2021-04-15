@@ -10,15 +10,21 @@ function Products({ PRODUCT, handleQuantity }) {
   };
 
   const IncrementQuantity = (item) => {
-    item.qty += qty;
-    handleQuantity(item);
+    if (qty) {
+      item.qty += qty;
+      handleQuantity(item);
+    } else {
+      alert("Please add amount of Item");
+    }
   };
 
   const decrementQuantity = (item) => {
     if (item.qty >= qty) {
       item.qty -= qty;
-      handleQuantity(item);
+    } else {
+      item.qty -= 1;
     }
+    handleQuantity(item);
   };
 
   return (
@@ -39,7 +45,7 @@ function Products({ PRODUCT, handleQuantity }) {
                   className="inputQty"
                   type="number"
                   maxLength="1"
-                  min="1"
+                  min="0"
                   max="9"
                   onChange={(e) => setQty(parseInt(e.target.value))}
                 />

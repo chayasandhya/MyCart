@@ -5,11 +5,19 @@ import { PRODUCT } from "./static/data";
 import "./App.css";
 import Login from "./Components/Login/Login";
 
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import Icon from "@material-ui/core/Icon";
+
 function App() {
   //const [quantity, setQuantity] = useState({ quant: "", id: "" });
   const [items, setItems] = useState(PRODUCT);
   const [isLogin, setIsLogin] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
+  const [veiwCart, setViewCart] = useState(false);
+
+  const showCart = () => {
+    setViewCart(true);
+  };
 
   useEffect(() => {
     let storage = JSON.parse(localStorage.getItem("isLogin"));
@@ -34,11 +42,19 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="app_container">
+      <nav className="navBar">
+        <h2 className="nav_head">Welcome to Cart</h2>
+        {isLogin && (
+          <button onClick={showCart} className="nav_cart">
+            <ShoppingCartIcon fontSize="large" />
+          </button>
+        )}
+      </nav>
       {isLogin ? (
         <div className="app">
           <Products PRODUCT={items} handleQuantity={handleQuantity}></Products>
-          <Cart items={items}></Cart>
+          {veiwCart && <Cart setViewCart={setViewCart} items={items}></Cart>}
         </div>
       ) : !isRegister ? (
         <Login
