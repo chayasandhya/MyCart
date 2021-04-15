@@ -41,14 +41,32 @@ function App() {
     console.log("regestringgggg");
   };
 
+  const searchItem = (searchText) => {
+    if (searchText) {
+      const searchItems = items.filter((each) =>
+        each.name.toLowerCase().startsWith(searchText.toLowerCase())
+      );
+      setItems(searchItems);
+    } else {
+      setItems(PRODUCT);
+    }
+  };
+
   return (
     <div className="app_container">
       <nav className="navBar">
         <h2 className="nav_head">Welcome to Cart</h2>
         {isLogin && (
-          <button onClick={showCart} className="nav_cart">
-            <ShoppingCartIcon fontSize="large" />
-          </button>
+          <div className="search_cart">
+            <input
+              type="text"
+              placeholder="search"
+              onChange={(e) => searchItem(e.target.value)}
+            />
+            <button onClick={showCart} className="nav_cart">
+              <ShoppingCartIcon fontSize="large" />
+            </button>
+          </div>
         )}
       </nav>
       {isLogin ? (

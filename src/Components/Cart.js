@@ -59,7 +59,7 @@ function Cart({ items, setViewCart }) {
           </div>
         </div>
       ) : (
-        <h1 style={{ textAlign: "center" }}>Add items to Cart 🥕 </h1>
+        <h1 style={{ textAlign: "center" }}>Add items to Cart 👻 </h1>
       )}
     </div>
   );
