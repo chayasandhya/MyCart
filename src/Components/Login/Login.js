@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "./Login.css";
+import { connect } from "react-redux";
 
-function Login({ typeOf, setIsRegister, setIsLogin }) {
+import { loginUser } from "../../store/action/LoginRegister";
+
+function Login({
+  typeOf,
+  setIsRegister,
+  setIsLogin,
+  login,
+  product,
+  loginUser,
+}) {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -10,7 +20,11 @@ function Login({ typeOf, setIsRegister, setIsLogin }) {
     setPassword("");
   }, [typeOf]);
 
-  const handleSubmit = () => {
+  //*****//
+  //redux//
+  //*****//
+
+  /* const handleSubmit = () => {
     if (typeOf == "Register") {
       localStorage.setItem(
         `${userName}`,
@@ -20,13 +34,6 @@ function Login({ typeOf, setIsRegister, setIsLogin }) {
     } else {
       const registeredUser = JSON.parse(localStorage.getItem(userName));
       if (registeredUser && registeredUser.password === password) {
-        /* var now = new Date();
-        var time = now.getTime();
-        var expireTime = time + 10000;
-        now.setTime(expireTime);
-        document.cookie =
-          `${userName}=loggedin;expires=` + now.toUTCString() + ";path=/"; */
-
         localStorage.setItem(
           "isLogin",
           JSON.stringify({
@@ -39,7 +46,7 @@ function Login({ typeOf, setIsRegister, setIsLogin }) {
         alert("Wrong Credentials");
       }
     }
-  };
+  }; */
 
   return (
     <div className="login_container">
@@ -59,7 +66,10 @@ function Login({ typeOf, setIsRegister, setIsLogin }) {
           type="password"
           placeholder="password"
         />
-        <button className="btn" onClick={handleSubmit}>
+        <button
+          className="btn"
+          onClick={() => loginUser(userName, password, typeOf)}
+        >
           {typeOf}
         </button>
         {typeOf == "Login" ? (
@@ -76,4 +86,15 @@ function Login({ typeOf, setIsRegister, setIsLogin }) {
   );
 }
 
-export default Login;
+const stateToProps = (state) => {
+  console.log("loginState:", state);
+  return { login: state.LoginReducer.data, product: state.ProductReducer.data };
+};
+
+/* const dispatchToProps=(dispatch)=>{
+  return {
+    loginfun
+  }
+} */
+
+export default connect(stateToProps, { loginUser })(Login);

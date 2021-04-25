@@ -5,13 +5,14 @@ import { PRODUCT } from "./static/data";
 import "./App.css";
 import Login from "./Components/Login/Login";
 
+import { connect } from "react-redux";
+
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Icon from "@material-ui/core/Icon";
 
-function App() {
-  //const [quantity, setQuantity] = useState({ quant: "", id: "" });
+function App({ isLogin }) {
   const [items, setItems] = useState(PRODUCT);
-  const [isLogin, setIsLogin] = useState(false);
+  //const [isLogin, setIsLogin] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
   const [veiwCart, setViewCart] = useState(false);
 
@@ -19,14 +20,18 @@ function App() {
     setViewCart(true);
   };
 
-  useEffect(() => {
+  //******//
+  //redux
+  //*****//
+
+  /* useEffect(() => {
     let storage = JSON.parse(localStorage.getItem("isLogin"));
     if (storage && storage.value) {
       setIsLogin(true);
     } else {
       setIsLogin(false);
     }
-  }, []);
+  }, []); */
 
   const handleQuantity = (item) => {
     console.log("add");
@@ -36,9 +41,7 @@ function App() {
   };
 
   const register = () => {
-    console.log(!isRegister);
     setIsRegister(!isRegister);
-    console.log("regestringgggg");
   };
 
   const searchItem = (searchText) => {
@@ -55,7 +58,7 @@ function App() {
   return (
     <div className="app_container">
       <nav className="navBar">
-        <h2 className="nav_head">Welcome to Cart</h2>
+        <h2 className="nav_head">Welcome to Cart 😇 </h2>
         {isLogin && (
           <div className="search_cart">
             <input
@@ -78,7 +81,7 @@ function App() {
         <Login
           typeOf="Login"
           setIsRegister={register}
-          setIsLogin={setIsLogin}
+          //setIsLogin={setIsLogin}
         ></Login>
       ) : (
         <Login typeOf="Register" setIsRegister={register}></Login>
@@ -87,4 +90,8 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return { isLogin: state.LoginReducer.login ? true : false };
+};
+
+export default connect(mapStateToProps)(App);
