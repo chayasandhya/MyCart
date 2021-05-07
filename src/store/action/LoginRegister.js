@@ -1,4 +1,4 @@
-import { LOGIN, REGISTER } from "../constants";
+import { LOGIN, REGISTER, ALERT } from "../constants";
 
 export const loginUser = (user, password, typeOf) => {
   if (typeOf == "Register") {
@@ -16,10 +16,22 @@ export const loginUser = (user, password, typeOf) => {
           payload: { user, password },
         };
       } else {
-        alert("Invalid credentials");
+        return {
+          type: ALERT,
+          payload: "Invalid credentials",
+        };
       }
     }
-    alert("User does not exist");
-    return { type: "NONE" };
+    return {
+      type: ALERT,
+      payload: "User does not exist",
+    };
   }
+};
+
+export const clearAlert = () => {
+  return {
+    type: ALERT,
+    payload: "",
+  };
 };

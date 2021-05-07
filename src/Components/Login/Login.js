@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import "./Login.css";
 import { connect } from "react-redux";
-
+// components -----------------------------------------------------------------
+import Alert from "../Alerts/Alert";
+// Action -----------------------------------------------------------------
 import { loginUser } from "../../store/action/LoginRegister";
+// CSS -----------------------------------------------------------------
+import "./Login.css";
 
 function Login({
   typeOf,
@@ -19,34 +22,6 @@ function Login({
     setUserName("");
     setPassword("");
   }, [typeOf]);
-
-  //*****//
-  //redux//
-  //*****//
-
-  /* const handleSubmit = () => {
-    if (typeOf == "Register") {
-      localStorage.setItem(
-        `${userName}`,
-        JSON.stringify({ userName, password })
-      );
-      setIsRegister();
-    } else {
-      const registeredUser = JSON.parse(localStorage.getItem(userName));
-      if (registeredUser && registeredUser.password === password) {
-        localStorage.setItem(
-          "isLogin",
-          JSON.stringify({
-            value: true,
-            timeStamp: new Date().getTime() + 2000,
-          })
-        );
-        setIsLogin(true);
-      } else {
-        alert("Wrong Credentials");
-      }
-    }
-  }; */
 
   return (
     <div className="login_container">
@@ -82,6 +57,7 @@ function Login({
           </h4>
         )}
       </div>
+      <Alert />
     </div>
   );
 }
@@ -90,11 +66,5 @@ const stateToProps = (state) => {
   console.log("loginState:", state);
   return { login: state.LoginReducer.data, product: state.ProductReducer.data };
 };
-
-/* const dispatchToProps=(dispatch)=>{
-  return {
-    loginfun
-  }
-} */
 
 export default connect(stateToProps, { loginUser })(Login);

@@ -1,8 +1,9 @@
-import { LOGIN, REGISTER } from "../constants";
+import { LOGIN, REGISTER, ALERT } from "../constants";
 
 const initialState = {
   data: "trial",
   login: null,
+  alertMsg: "",
 };
 
 export function LoginReducer(state = initialState, action) {
@@ -14,7 +15,12 @@ export function LoginReducer(state = initialState, action) {
       };
       return currentState;
     }
-
+    case ALERT: {
+      return {
+        ...state,
+        alertMsg: action.payload,
+      };
+    }
     default:
       return state;
   }

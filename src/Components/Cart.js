@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+// CSS -----------------------------------------------------------------
 import "./Cart.css";
 
 function Cart({ items, setViewCart }) {

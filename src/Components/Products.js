@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+//css --------------------------------------------------------------
 import "./Product.css";
 
 function Products({ PRODUCT, handleQuantity }) {
-  const [qty, setQty] = useState();
+  const [qty, setQty] = useState(1);
 
   const addToCart = (item) => {
     item.qty += 1;
@@ -42,11 +43,9 @@ function Products({ PRODUCT, handleQuantity }) {
               <div className="options">
                 <button onClick={() => IncrementQuantity(each)}>+</button>
                 <input
+                  value={each.qty}
                   className="inputQty"
                   type="number"
-                  maxLength="1"
-                  min="0"
-                  max="9"
                   onChange={(e) => setQty(parseInt(e.target.value))}
                 />
                 <button

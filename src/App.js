@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
+//components ------------------------------------------------------
+import Login from "./Components/Login/Login";
 import Products from "./Components/Products";
 import Cart from "./Components/Cart";
+// other imports -------------------------------------------------------------
 import { PRODUCT } from "./static/data";
-import "./App.css";
-import Login from "./Components/Login/Login";
-
 import { connect } from "react-redux";
-
+// css -------------------------------------------------------------
+import "./App.css";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Icon from "@material-ui/core/Icon";
 
 function App({ isLogin }) {
   const [items, setItems] = useState(PRODUCT);
-  //const [isLogin, setIsLogin] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
   const [veiwCart, setViewCart] = useState(false);
 
@@ -20,23 +20,14 @@ function App({ isLogin }) {
     setViewCart(true);
   };
 
-  //******//
-  //redux
-  //*****//
-
-  /* useEffect(() => {
-    let storage = JSON.parse(localStorage.getItem("isLogin"));
-    if (storage && storage.value) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, []); */
-
   const handleQuantity = (item) => {
     console.log("add");
-    let itemsCopy = [...items];
-    itemsCopy[item.id - 1] = item;
+    let itemsCopy = items.map((it) => {
+      if (it.id == item.id) {
+        it = { ...item };
+      }
+      return it;
+    });
     setItems(itemsCopy);
   };
 
